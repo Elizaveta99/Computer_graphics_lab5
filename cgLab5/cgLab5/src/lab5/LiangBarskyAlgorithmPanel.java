@@ -23,6 +23,7 @@ public class LiangBarskyAlgorithmPanel extends JPanel
 {
     
     
+    
     //   как сместить всё на правильные координаты, масштаб?
     //   обрезка не работает. size of result in 1 alg, нет зелёного; нет синего цвета во 2-ом,зелёный неправильно
     
@@ -153,7 +154,7 @@ public class LiangBarskyAlgorithmPanel extends JPanel
         drawLines(g2, subject, Color.blue);
         drawPolygon(g2, clipper, Color.red);
         
-        System.out.println(result.size());
+        //System.out.println(result.size());
         
         drawLines(g2, result, Color.green);
     }

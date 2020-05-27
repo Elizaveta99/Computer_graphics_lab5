@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package lab5;
 
 import java.awt.BorderLayout;
@@ -16,15 +11,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 
-/**
- *
- * @author Professional
- */
 public class Main extends javax.swing.JFrame {
 
    private LiangBarskyAlgorithmPanel liangBarskyAlgorithmPanel;
    private SutherlandHodgmanAlgorithmPanel sutherlandHodgmanAlgorithmPanel;
    private int type;
+   private int x0, y0, x1, y1;
      
     public Main() {
         initComponents();
@@ -163,7 +155,6 @@ public class Main extends javax.swing.JFrame {
                     {
                       Point2D temp = new Point2D(scanner.nextDouble() * 25, scanner.nextDouble() * 25);
                       SutherlandHodgmanAlgorithmPanel.subject.add(temp);
-                      System.out.println(temp.getX() + " " + temp.getY());
                     }
 
                     n = scanner.nextInt();
@@ -172,8 +163,6 @@ public class Main extends javax.swing.JFrame {
                     {
                       Point2D temp = new Point2D(scanner.nextDouble() * 25, scanner.nextDouble() * 25);
                       SutherlandHodgmanAlgorithmPanel.clipper.add(temp);
-                      //SutherlandHodgmanAlgorithmPanel.setPoints();
-                      System.out.println(temp.getX() + " " + temp.getY());
                     }
                 } catch (IOException ex) {
                     Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -184,32 +173,11 @@ public class Main extends javax.swing.JFrame {
             {
                 try {
                     scanner = new Scanner(file.toPath());
-                    int n = scanner.nextInt();
-                    LiangBarskyAlgorithmPanel.subject.clear();
-                    LiangBarskyAlgorithmPanel.clipper.clear();
-                    LiangBarskyAlgorithmPanel.result.clear();
-
-                    for (int i = 0; i < n; i++)
-                    {
-                      Point4D temp = new Point4D(scanner.nextDouble() * 25, scanner.nextDouble() * 25, scanner.nextDouble() * 25, scanner.nextDouble() * 25);
-                      LiangBarskyAlgorithmPanel.subject.add(temp);
-                      //System.out.println(temp.getX1() + " " + temp.getY1() + " " + temp.getX2() + " " + temp.getY2());
-                    }
-
-                    n = scanner.nextInt();
-                    //System.out.println("2-n " + n);
-
-                    for (int i = 0; i < n; i++) 
-                    {
-                      Point2D temp = new Point2D(scanner.nextDouble() * 25, scanner.nextDouble() * 25);
-                      LiangBarskyAlgorithmPanel.clipper.add(temp);
-
-
-                      //System.out.println(temp.getX() + " " + temp.getY());
-                    }
-                    
-                    LiangBarskyAlgorithmPanel.setPoints();
-                
+                    x0 = scanner.nextInt();
+                    y0 = scanner.nextInt();
+                    x1 = scanner.nextInt(); 
+                    y1 = scanner.nextInt();
+                  
                 } catch (IOException ex) {
                     Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -218,6 +186,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     SutherlandHodgmanPanel panel;
+    LineClippingPanel panelLiang;
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         
         System.out.println(type);
@@ -225,9 +194,15 @@ public class Main extends javax.swing.JFrame {
         Container content = getContentPane();
         content.setLayout(new BorderLayout());
         if (type == 1) 
-        {
-            liangBarskyAlgorithmPanel = new LiangBarskyAlgorithmPanel();
-            content.add(liangBarskyAlgorithmPanel, BorderLayout.CENTER);
+        {   
+            content = getContentPane();
+            content.setLayout(new BorderLayout());
+            panelLiang = new LineClippingPanel(x0, y0, x1, y1);
+            content.add(panelLiang, BorderLayout.CENTER);
+            setTitle("LiangBarsky");
+            pack();
+            setLocationRelativeTo(null);
+            
         }
         else if (type == 2) 
         {
