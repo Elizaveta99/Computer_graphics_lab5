@@ -25,7 +25,7 @@ public class Main extends javax.swing.JFrame {
    private LiangBarskyAlgorithmPanel liangBarskyAlgorithmPanel;
    private SutherlandHodgmanAlgorithmPanel sutherlandHodgmanAlgorithmPanel;
    private int type;
-    
+     
     public Main() {
         initComponents();
         type = 0;
@@ -172,9 +172,7 @@ public class Main extends javax.swing.JFrame {
                     {
                       Point2D temp = new Point2D(scanner.nextDouble() * 25, scanner.nextDouble() * 25);
                       SutherlandHodgmanAlgorithmPanel.clipper.add(temp);
-
-                      SutherlandHodgmanAlgorithmPanel.setPoints();
-
+                      //SutherlandHodgmanAlgorithmPanel.setPoints();
                       System.out.println(temp.getX() + " " + temp.getY());
                     }
                 } catch (IOException ex) {
@@ -195,11 +193,11 @@ public class Main extends javax.swing.JFrame {
                     {
                       Point4D temp = new Point4D(scanner.nextDouble() * 25, scanner.nextDouble() * 25, scanner.nextDouble() * 25, scanner.nextDouble() * 25);
                       LiangBarskyAlgorithmPanel.subject.add(temp);
-                      System.out.println(temp.getX1() + " " + temp.getY1() + " " + temp.getX2() + " " + temp.getY2());
+                      //System.out.println(temp.getX1() + " " + temp.getY1() + " " + temp.getX2() + " " + temp.getY2());
                     }
 
                     n = scanner.nextInt();
-                    System.out.println("2- n " + n);
+                    //System.out.println("2-n " + n);
 
                     for (int i = 0; i < n; i++) 
                     {
@@ -207,7 +205,7 @@ public class Main extends javax.swing.JFrame {
                       LiangBarskyAlgorithmPanel.clipper.add(temp);
 
 
-                      System.out.println(temp.getX() + " " + temp.getY());
+                      //System.out.println(temp.getX() + " " + temp.getY());
                     }
                     
                     LiangBarskyAlgorithmPanel.setPoints();
@@ -219,6 +217,7 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    SutherlandHodgmanPanel panel;
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         
         System.out.println(type);
@@ -232,8 +231,14 @@ public class Main extends javax.swing.JFrame {
         }
         else if (type == 2) 
         {
-            sutherlandHodgmanAlgorithmPanel = new SutherlandHodgmanAlgorithmPanel();
-            content.add(sutherlandHodgmanAlgorithmPanel, BorderLayout.CENTER);
+            content = getContentPane();
+            content.setLayout(new BorderLayout());
+            panel = new SutherlandHodgmanPanel();
+            content.add(panel, BorderLayout.CENTER);
+            setTitle("SutherlandHodgman");
+            pack();
+            setLocationRelativeTo(null);
+
         }
         
     }//GEN-LAST:event_jButton2ActionPerformed

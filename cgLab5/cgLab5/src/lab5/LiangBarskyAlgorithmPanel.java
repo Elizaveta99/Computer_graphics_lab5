@@ -21,6 +21,13 @@ import javax.swing.JPanel;
  */
 public class LiangBarskyAlgorithmPanel extends JPanel 
 {
+    
+    
+    //   как сместить всё на правильные координаты, масштаб?
+    //   обрезка не работает. size of result in 1 alg, нет зелёного; нет синего цвета во 2-ом,зелёный неправильно
+    
+    
+    
     public static List<Point4D> subject = new ArrayList<Point4D>(), 
                                 result = new ArrayList<Point4D>();
     
@@ -31,6 +38,7 @@ public class LiangBarskyAlgorithmPanel extends JPanel
     public LiangBarskyAlgorithmPanel()
     {
        this.repaint();
+       System.out.println("repaint");
     }
     
     private static boolean clipTest (double p, double q, double t1, double t2) 

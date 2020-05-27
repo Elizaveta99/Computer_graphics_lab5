@@ -25,23 +25,18 @@ public class SutherlandHodgmanAlgorithmPanel extends JPanel
  
     public static List<Point2D> subject = new ArrayList<Point2D>(), 
                                 clipper = new ArrayList<Point2D>(),
-                                result = new ArrayList<Point2D>();
+                                result = new ArrayList<Point2D>(),                 
+                                res = new ArrayList<Point2D>();
+
     private double xC = 355, yC = 275;
     //public double[][] subjPoints, clipPoints;
     
     public static void setPoints()
     {
-//        double[][] subjPoints = {{50, 150}, {200, 50}, {350, 150}, {350, 300},
-//        {250, 300}, {200, 250}, {150, 350}, {100, 250}, {100, 200}};
-//
-//        double[][] clipPoints = {{100, 100}, {300, 100}, {300, 300}, {100, 300}};
-
         //subject = new ArrayList<>(Arrays.asList(subjPoints));
         result  = new ArrayList<>(subject);
-                System.out.println("res1 = " + result.size());
-
+        System.out.println("res1 = " + result.size());
         //clipper = new ArrayList<>(Arrays.asList(clipPoints));
-
         clipPolygon();
     }
     
@@ -57,24 +52,31 @@ public class SutherlandHodgmanAlgorithmPanel extends JPanel
 
             int len2 = result.size();
             List<Point2D> input = result;
-            result = new ArrayList<>(len2);
-                    System.out.println("res2 = " + result.size());
+            //result = new ArrayList<>(len2);
+                    System.out.println("len2 = " + len2);
 
 
             Point2D A = clipper.get((i + len - 1) % len);
             Point2D B = clipper.get(i);
 
-            for (int j = 0; j < len2; j++) {
+            for (int j = 0; j < len2; j++) 
+            {
 
                 Point2D P = input.get((j + len2 - 1) % len2);
                 Point2D Q = input.get(j);
+                
+                System.out.println("P " + P.toString() + "Q " + Q.toString() + " " + j);
 
                 if (isInside(A, B, Q)) {
                     if (!isInside(A, B, P))
-                        result.add(intersection(A, B, P, Q));
-                    result.add(Q);
+                        //result.add(intersection(A, B, P, Q));
+                        res.add(intersection(A, B, P, Q));
+
+                   // result.add(Q);
+                   res.add(Q);
                 } else if (isInside(A, B, P))
-                    result.add(intersection(A, B, P, Q));
+                    //result.add(intersection(A, B, P, Q));
+                    res.add(intersection(A, B, P, Q));
             }
         }
     }
@@ -122,17 +124,23 @@ public class SutherlandHodgmanAlgorithmPanel extends JPanel
         drawPolygon(g2, subject, Color.blue);
         drawPolygon(g2, clipper, Color.red);
         
-        System.out.println(result.size());
+        System.out.println("result size in paint " + result.size());  
+        System.out.println("res size in paint " + res.size());
+
         
-        drawPolygon(g2, result, Color.green);
+        //drawPolygon(g2, result, Color.green);
+        drawPolygon(g2, res, Color.green);
     }
     
     private void drawPolygon(Graphics2D g2, List<Point2D> points, Color color) {
         g2.setColor(color);
         int len = points.size();
         Line2D line = new Line2D.Double();
-        for (int i = 0; i < len; i++) {
+        for (int i = 0; i < len; i++) 
+        {
+            
             System.out.println(color.toString());
+            
             Point2D p1 = points.get(i);
             Point2D p2 = points.get((i + 1) % len);
             line.setLine(p1.getX() + xC, p1.getY() + yC, p2.getX() + xC, p2.getY() + yC);
